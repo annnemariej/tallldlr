@@ -11,7 +11,7 @@
 <body>
 
     <nav>
-
+        <H1> TALLDLR</H1>
     </nav>
 
     <div id="container">
@@ -42,29 +42,81 @@
 
     <div id="tastatur">
         <div id="tastaturgruppeEn" class="tastaturgrupper">
-            <div data-key="1">1</div>
-            <div data-key="2">2</div>
+            <div data-key="1" class="tast">1</div>
+            <div data-key="2" class="tast">2</div>
             <div data-key="3">3</div>
         </div>
         <div id="tastaturgruppeTo" class="tastaturgrupper">
-            <div data-key="4">4</div>
+            <div data-key="4" class="tast">4</div>
             <div data-key="5">5</div>
             <div data-key="6">6</div>
         </div>
         <div id="tastaturgruppeTre" class="tastaturgrupper">
-            <div data-key="7">7</div>
-            <div data-key="8">8</div>
+            <div data-key="7" class="tast">7</div>
+            <div data-key="8" class="tast">8</div>
             <div data-key="9">9</div>
         </div>
         <div id="tastaturgruppeFire" class="tastaturgrupper">
-            <div data-key="backspace">⌫</div>
-            <div data-key="0">0</div>
-            <div data-key="enter">Enter</div>
+            <div data-key="backspace" class="tast">⌫</div>
+            <div data-key="0" class="tast">0</div>
+            <div data-key="enter" class="tast">Enter</div>
         </div>
     </div>
 
     <script>
-        //Her kommer js etterhvert
+        //Bestemmer tallet man skal komme frem til
+        const talletEn = Math.floor(Math.random() * 9)
+        const talletTo = Math.floor(Math.random() * 9)
+        const talletTre = Math.floor(Math.random() * 9)
+
+        console.log("Tallene er", talletEn, talletTo, talletTre)
+
+        //Digitalt tastatur sin programmeirng
+
+        const tastaturDivs = document.querySelectorAll('#tastatur .tast');
+
+        
+        tastaturDivs.forEach(div => {
+            div.addEventListener('click', event => {
+                const key = event.target.dataset.key;
+
+                if (key === 'backspace') {
+                    handleBackspace();
+                    console.log("Du har trykket backspace")
+                } else if (key === 'enter') {
+                    handleEnter();
+                } else if (key) { // Ensure key is defined
+                    handleKey(key);
+                    console.log("Du har trykket")
+                }
+            });
+        });
+
+
+        //for at vanlig pc-tastur også funker:
+        document.addEventListener('keydown', event => {
+            const key = event.key;
+
+            if (!isNaN(tast)) {
+                handleKey(key);
+            } else if (tast === 'Backspace') {
+                handleBackspace();
+                event.preventDefault();
+            } else if (tast === 'Enter') {
+                handleEnter();
+                event.preventDefault();
+            }
+        });
+
+
+        // Add click listeners to all keys
+        const tallgrupper = document.querySelectorAll('.tallgruppe')
+
+
+
+
+
+
     </script>
 
 </body>
