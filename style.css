@@ -1,0 +1,140 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+img{
+    width: 100%;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+nav{
+    height: 70px;
+    width: 100%;
+    background-color: lightblue;
+    position: fixed;
+    top: 0;
+}
+
+#mellomrom{
+    height: 200px;
+    width: 100%;
+    
+}
+
+#container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-auto-rows: 100px;
+    width: 600px;
+    gap: 10px;
+    column-gap: 5px;
+    margin-top: 200px;
+    padding: 5px;
+
+}
+
+.nummer{
+    text-align: center;
+    font: 40px;
+    outline: none;
+    background-color: white;
+    border: 1px solid black;
+    gap: 20px;
+
+}
+
+#try1{
+    grid-column: 1/4;
+    grid-row: 1/2;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+#try2{
+    grid-column: 1/4;
+    grid-row: 2/3;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+#try3{
+    grid-column: 1/4;
+    grid-row: 3/4;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#try4{
+    grid-column: 1/4;
+    grid-row: 4/5;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+#tastatur{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    border: 1px solid black;
+    width: 300px;
+    height: 500px;
+
+}
+
+
+#tastaturgruppeEn{
+    grid-column: 1/4;
+    grid-row: 1/2;
+    display: flex;
+    justify-content: center;
+
+
+}
+
+#tastaturgruppeTo{
+    grid-column: 1/4;
+    grid-row: 2/3;
+    display: flex;
+    justify-content: center;
+
+
+}
+#tastaturgruppeTre{
+    grid-column: 1/4;
+    grid-row:3/4;
+    display: flex;
+    justify-content: center;
+
+}
+
+#tastaturgruppeFire{
+    grid-column: 1/4;
+    grid-row: 4/5;
+    display: flex;
+    justify-content: center;
+
+}
+
+.tastaturgrupper div{
+    background-color: white;
+    border: none;
+    height: 60px;
+    width: 60px;
+
+}
