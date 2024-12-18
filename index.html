@@ -53,15 +53,29 @@
     </div>
 
     <script>
+
+        function treFilfeldigeTall() {
+            const tilfeldigeTall = [
+                Math.floor(Math.random() * 4),
+                Math.floor(Math.random() * 4),
+                Math.floor(Math.random() * 4)
+            ]
+            return tilfeldigeTall
+        }
+
         // Array, lsite, med tre tall som skal gjettes
-        const target = [
-            Math.floor(Math.random() * 10),
-            Math.floor(Math.random() * 10),
-            Math.floor(Math.random() * 10)
-        ];
+        let target = treFilfeldigeTall()
         console.log("Tallet som skal gjettes er", target.join(""));
 
-        let svaret = target.join("");
+        while (target[0] == target[1]
+            || target[0] == target[2]
+            || target[1] == target[2]
+        ) {
+            target = treFilfeldigeTall()
+            console.log("Tallet som skal gjettes er", target.join(""));
+        }
+
+        const svaret = target.join("");
         console.log("Svaret er", svaret);
 
         const tallgrupper = document.querySelectorAll('.tallgruppe');
