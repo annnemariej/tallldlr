@@ -4,119 +4,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talldlr</title>
+    <title>Nummer Wordle</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
     <nav>
-        <H1> TALLDLR</H1>
+        <h1> TALLDLR</h1>
     </nav>
 
     <div id="container">
         <div class="tallgruppe" id="try1">
-            <input type="text" class="nummer forstenummer" maxlength="1" />
-            <input type="text" class="nummer" maxlength="1" />
-            <input type="text" class="nummer" maxlength="1" />
+            <input type="text" class="nummer" maxlength="1" disabled />
+            <input type="text" class="nummer" maxlength="1" disabled />
+            <input type="text" class="nummer" maxlength="1" disabled />
         </div>
-
         <div class="tallgruppe" id="try2">
-            <input type="text" class="nummer forstenummer" maxlength="1" disabled />
+            <input type="text" class="nummer" maxlength="1" disabled />
             <input type="text" class="nummer" maxlength="1" disabled />
             <input type="text" class="nummer" maxlength="1" disabled />
         </div>
-
         <div class="tallgruppe" id="try3">
-            <input type="text" class="nummer forstenummer" maxlength="1" disabled />
+            <input type="text" class="nummer" maxlength="1" disabled />
             <input type="text" class="nummer" maxlength="1" disabled />
             <input type="text" class="nummer" maxlength="1" disabled />
         </div>
-
         <div class="tallgruppe" id="try4">
-            <input type="text" class="nummer forstenummer" maxlength="1" disabled />
+            <input type="text" class="nummer" maxlength="1" disabled />
             <input type="text" class="nummer" maxlength="1" disabled />
             <input type="text" class="nummer" maxlength="1" disabled />
         </div>
     </div>
 
     <div id="tastatur">
-        <div id="tastaturgruppeEn" class="tastaturgrupper">
-            <div data-key="1" class="tast">1</div>
-            <div data-key="2" class="tast">2</div>
-            <div data-key="3">3</div>
-        </div>
-        <div id="tastaturgruppeTo" class="tastaturgrupper">
-            <div data-key="4" class="tast">4</div>
-            <div data-key="5">5</div>
-            <div data-key="6">6</div>
-        </div>
-        <div id="tastaturgruppeTre" class="tastaturgrupper">
-            <div data-key="7" class="tast">7</div>
-            <div data-key="8" class="tast">8</div>
-            <div data-key="9">9</div>
-        </div>
-        <div id="tastaturgruppeFire" class="tastaturgrupper">
-            <div data-key="backspace" class="tast">⌫</div>
-            <div data-key="0" class="tast">0</div>
-            <div data-key="enter" class="tast">Enter</div>
-        </div>
+
+        <button data-key="1">1</button>
+        <button data-key="2">2</button>
+        <button data-key="3">3</button>
+        <button data-key="4">4</button>
+        <button data-key="5">5</button>
+        <button data-key="6">6</button>
+        <button data-key="7">7</button>
+        <button data-key="8">8</button>
+        <button data-key="9">9</button>
+        <button data-key="backspace">⌫</button>
+        <button data-key="0">0</button>
+        <button data-key="enter">Enter</button>
     </div>
 
     <script>
-        //Bestemmer tallet man skal komme frem til
-        const talletEn = Math.floor(Math.random() * 9)
-        const talletTo = Math.floor(Math.random() * 9)
-        const talletTre = Math.floor(Math.random() * 9)
+        // Array, lsite, med tre tall som skal gjettes
+        const target = [
+            Math.floor(Math.random() * 10),
+            Math.floor(Math.random() * 10),
+            Math.floor(Math.random() * 10)
+        ];
+        console.log("Tallet som skal gjettes er", target.join(""));
 
-        console.log("Tallene er", talletEn, talletTo, talletTre)
+        let svaret = target.join("");
+        console.log("Svaret er", svaret);
 
-        //Digitalt tastatur sin programmeirng
+        const tallgrupper = document.querySelectorAll('.tallgruppe');
+        const tastaturKnappper = document.querySelectorAll('#tastatur button');
 
-        const tastaturDivs = document.querySelectorAll('#tastatur .tast');
+        let tallgruppeNummer = 0;
+        let forsokNummer = 0;
 
-        
-        tastaturDivs.forEach(div => {
-            div.addEventListener('click', event => {
+        function aktivereGruppe() {
+            const gruppe = tallgrupper[tallgruppeNummer];
+            gruppe.querySelectorAll('.nummer').forEach(function (input) {
+                input.disabled = false;
+            });
+            gruppe.querySelector('.nummer').focus();
+        }
+
+        function deaktivereGruppe(index) {
+            const gruppe = tallgrupper[index];
+            gruppe.querySelectorAll('.nummer').forEach(function (input) {
+                input.disabled = true;
+            });
+        }
+
+        function nesteGruppe() {
+            if (tallgruppeNummer < tallgrupper.length - 1) {
+                deaktivereGruppe(tallgruppeNummer);
+                tallgruppeNummer++;
+                forsokNummer = 0;
+                aktivereGruppe();
+            } else {
+                alert(`Game over! Du gjetta feil. Svaret var ${svaret}`);
+            }
+        }
+
+        function sjekkeSvar() {
+            const gruppe = tallgrupper[tallgruppeNummer];
+            const inputs = gruppe.querySelectorAll('.nummer');
+            const guess = Array.from(inputs).map(function (input) {
+                return parseInt(input.value, 10);
+            });
+
+            if (guess.some(function (num) { return isNaN(num); })) {
+                alert("Skriv inn nummere i boksene!");
+                return;
+            }
+
+            guess.forEach(function (num, i) {
+                if (num === target[i]) {
+                    inputs[i].style.backgroundColor = "green";
+                } else if (target.includes(num)) {
+                    inputs[i].style.backgroundColor = "yellow";
+                } else {
+                    inputs[i].style.backgroundColor = "grey";
+                }
+            });
+
+            if (guess.join("") === target.join("")) {
+                setTimeout(function () {
+                    alert("Du vant! Du gjetta tallet riktig!");
+                }, 10);
+                return;
+            }
+
+            nesteGruppe();
+        }
+
+        function handleKey(key) {
+            const gruppe = tallgrupper[tallgruppeNummer];
+            const inputs = gruppe.querySelectorAll('.nummer');
+
+            if (!isNaN(key)) {
+                if (forsokNummer < inputs.length) {
+                    inputs[forsokNummer].value = key;
+                    forsokNummer++;
+                }
+            }
+        }
+
+        function handleBackspace() {
+            const gruppe = tallgrupper[tallgruppeNummer];
+            const inputs = gruppe.querySelectorAll('.nummer');
+
+            if (forsokNummer > 0) {
+                forsokNummer--;
+                inputs[forsokNummer].value = "";
+            }
+        }
+
+        function handleEnter() {
+            const gruppe = tallgrupper[tallgruppeNummer];
+            const inputs = gruppe.querySelectorAll('.nummer');
+            const isComplete = Array.from(inputs).every(function (input) {
+                return input.value !== "";
+            });
+
+            if (isComplete) {
+                sjekkeSvar();
+            } else {
+                alert("Complete the current row before submitting!");
+            }
+        }
+
+        // Handle button clicks
+        tastaturKnappper.forEach(function (button) {
+            button.addEventListener("click", function (event) {
                 const key = event.target.dataset.key;
 
-                if (key === 'backspace') {
+                if (key === "backspace") {
                     handleBackspace();
-                    console.log("Du har trykket backspace")
-                } else if (key === 'enter') {
+                } else if (key === "enter") {
                     handleEnter();
-                } else if (key) { // Ensure key is defined
+                } else {
                     handleKey(key);
-                    console.log("Du har trykket")
                 }
             });
         });
 
-
-        //for at vanlig pc-tastur også funker:
-        document.addEventListener('keydown', event => {
-            const key = event.key;
-
-            if (!isNaN(tast)) {
-                handleKey(key);
-            } else if (tast === 'Backspace') {
+        // Handle physical keyboard input
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Backspace") {
                 handleBackspace();
-                event.preventDefault();
-            } else if (tast === 'Enter') {
+            } else if (event.key === "Enter") {
                 handleEnter();
-                event.preventDefault();
+            } else if (!isNaN(event.key) && event.key.length === 1) { // Check for single number keys
+                handleKey(event.key);
             }
         });
 
-
-        // Add click listeners to all keys
-        const tallgrupper = document.querySelectorAll('.tallgruppe')
-
-
-
-
-
+        // Initialize the first group
+        aktivereGruppe();
 
     </script>
-
 </body>
+
+</html>
