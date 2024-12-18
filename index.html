@@ -160,7 +160,7 @@
             if (isComplete) {
                 sjekkeSvar();
             } else {
-                alert("Complete the current row before submitting!");
+                alert("Gjør ferdig raden før du klikker enter");
             }
         }
 
@@ -179,18 +179,18 @@
             });
         });
 
-        // Handle physical keyboard input
+
         document.addEventListener("keydown", function (event) {
             if (event.key === "Backspace") {
                 handleBackspace();
             } else if (event.key === "Enter") {
                 handleEnter();
-            } else if (!isNaN(event.key) && event.key.length === 1) { // Check for single number keys
+            } else if (!isNaN(event.key) && event.key.length === 1) {
                 handleKey(event.key);
             }
         });
 
-        // Initialize the first group
+
         aktivereGruppe();
 
     </script>
