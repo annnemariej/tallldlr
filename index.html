@@ -37,28 +37,36 @@
     </div>
 
     <div id="tastatur">
-
+        <div id="tastaturgruppeEn" class="tastaturgrupper">
         <button data-key="1">1</button>
         <button data-key="2">2</button>
         <button data-key="3">3</button>
-        <button data-key="4">4</button>
-        <button data-key="5">5</button>
-        <button data-key="6">6</button>
+        </div>
+        <div id="tastaturgruppeTo" class="tastaturgrupper">
+            <button data-key="4">4</button>
+            <button data-key="5">5</button>
+            <button data-key="6">6</button>
+        </div>
+        <div id="tastaturgruppeTre" class="tastaturgrupper">
         <button data-key="7">7</button>
         <button data-key="8">8</button>
         <button data-key="9">9</button>
+        </div>
+        <div id="tastaturgruppeFire" class="tastaturgrupper">
         <button data-key="backspace">⌫</button>
         <button data-key="0">0</button>
         <button data-key="enter">Enter</button>
+        </div>
+
     </div>
 
     <script>
 
         function treFilfeldigeTall() {
             const tilfeldigeTall = [
-                Math.floor(Math.random() * 9),
-                Math.floor(Math.random() * 9),
-                Math.floor(Math.random() * 9)
+                Math.floor(Math.random() * 10),
+                Math.floor(Math.random() * 10),
+                Math.floor(Math.random() * 10)
             ]
             return tilfeldigeTall
         }

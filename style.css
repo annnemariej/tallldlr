@@ -94,6 +94,7 @@ nav{
     border: 1px solid black;
     width: 300px;
     height: 500px;
+    margin-bottom: 100px;
 
 }
 
@@ -131,7 +132,7 @@ nav{
 
 }
 
-.tastaturgrupper div{
+.tastaturgrupper button{
     background-color: white;
     border: none;
     height: 60px;
