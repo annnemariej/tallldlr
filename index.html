@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nummer Wordle</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpg" href="bilder/talldlrfavicon.jpg">
 </head>
 
 <body>
     <nav>
-        <h1> TALLDLR</h1>
+        <h1 id="overskrift"> TALLDLR</h1>
+        <button onclick="omstart()" id="restartknapp">Restart</button>
     </nav>
 
     <div id="container">
@@ -72,6 +74,13 @@
         }
 
         // Array, lsite, med tre tall som skal gjettes
+
+        function omstart(){
+            location.reload()
+        }
+
+
+
         let target = treFilfeldigeTall()
         console.log("Tallet som skal gjettes er", target.join(""));
 
