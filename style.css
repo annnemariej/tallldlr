@@ -8,27 +8,62 @@ img{
     width: 100%;
 }
 
-body{
+body {
     height: 100vh;
     display: flex;
+    flex-direction: column; 
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
     gap: 50px;
 }
 
-nav{
-    height: 70px;
-    width: 100%;
-    background-color: rgb(81, 194, 60);
-    position: fixed;
-    top: 0;
+nav {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px 20px;
+    background-color: green; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    border-bottom: 2px solid #e5e7eb; 
+    height: 120px;
+    position: fixed; 
+    top: 0; /* Stick to the top */
+    width: 100%; 
+    z-index: 1000; 
+
+
 }
 
-#overskrift{
-
+#overskrift {
+    font-family: 'Arial', sans-serif; 
+    font-size: 50px;
+    color: white;
+    margin: 0;
+    text-align: center;
 }
 
+#restartknapp {
+    position: absolute;
+    right: 100px; 
+    background-color: #4caf50;
+    color: white; 
+    font-family: 'Arial', sans-serif; 
+    font-size: 14px;
+    padding: 16px 42px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#restartknapp:hover {
+    background-color: #45a049; 
+    transform: scale(1.05); 
+}
+
+#restartknapp:active {
+    background-color: #388e3c; 
+    transform: scale(0.95); 
+}
 
 #mellomrom{
     height: 200px;
@@ -43,7 +78,7 @@ nav{
     width: 600px;
     gap: 10px;
     column-gap: 5px;
-    margin-top: 200px;
+    margin-top: 130px;
     padding: 5px;
 
 }
